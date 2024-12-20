@@ -1,14 +1,5 @@
 import * as React from 'react';
-import { View, 
-  StyleSheet, 
-  TouchableOpacity, 
-  Text, 
-  Animated, 
-  Platform, 
-  ScrollView, 
-  SafeAreaView, 
-  I18nManager 
-} from 'react-native';
+import { SafeAreaView, View, TouchableOpacity, Text } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Home = () => {
@@ -29,30 +20,30 @@ const Home = () => {
 
   const getIconColor = (tab) => {
     if (tab === currentTab) {
-      return '#FF6347'; // Highlighted color when active (e.g., Tomato red)
+      return '#FF6347'; // Highlighted color when active
     } else if (tab === pressedTab) {
-      return '#FF4500'; // Pressed state color (e.g., OrangeRed)
+      return '#FF4500'; // Pressed state color
     } else {
-      return '#aaaaaa'; // Default color when not active or pressed
+      return '#aaaaaa'; // Default color
     }
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView className="flex-1 bg-black ">
       {/* Dynamic content based on currentTab */}
-      <View style={styles.content}>
-        {currentTab === 'dataanalytics' && <Text>Data Analytics Content</Text>}
-        {currentTab === 'home' && <Text>Log Workout Content</Text>}
-        {currentTab === 'previousworkout' && <Text>Previous Workout</Text>}
-        {currentTab === 'nutrition' && <Text>Nutrition Content</Text>}
-        {currentTab === 'goals' && <Text>Goals Content</Text>}
+      <View className="flex-1 justify-center items-center h-full">
+        {currentTab === 'dataanalytics' && <Text className="text-white">Data Analytics Content</Text>}
+        {currentTab === 'home' && <Text className="text-white">Log Workout Content</Text>}
+        {currentTab === 'previousworkout' && <Text className="text-white">Previous Workout</Text>}
+        {currentTab === 'nutrition' && <Text className="text-white">Nutrition Content</Text>}
+        {currentTab === 'goals' && <Text className="text-white">Goals Content</Text>}
       </View>
 
       {/* Custom Navigation Bar */}
-      <View style={styles.navBar}>
-        <View style={{ flex: 1, alignItems: 'center' }}>
+      <View className="flex-row items-center bg-gray-900 h-20 px-3">
+        <View className="flex-1 items-center">
           <TouchableOpacity
-            style={styles.navItem}
+            className="items-center justify-center mb-1"
             onPress={() => navigateTo('nutrition')}
             onPressIn={() => handlePressIn('nutrition')}
             onPressOut={handlePressOut}>
@@ -61,13 +52,13 @@ const Home = () => {
               size={35}
               color={getIconColor('nutrition')}
             />
-            <Text style={styles.navLabel}>Nutrition</Text>
+            <Text className="text-gray-400 text-sm mt-1 text-center">Nutrition</Text>
           </TouchableOpacity>
         </View>
 
-        <View style={{ flex: 1, alignItems: 'center' }}>
+        <View className="flex-1 items-center">
           <TouchableOpacity
-            style={styles.navItem}
+            className="items-center justify-center mb-1"
             onPress={() => navigateTo('goals')}
             onPressIn={() => handlePressIn('goals')}
             onPressOut={handlePressOut}>
@@ -76,13 +67,13 @@ const Home = () => {
               size={35}
               color={getIconColor('goals')}
             />
-            <Text style={styles.navLabel}>Goals</Text>
+            <Text className="text-gray-400 text-sm mt-1 text-center">Goals</Text>
           </TouchableOpacity>
         </View>
 
-        <View style={{ flex: 1, alignItems: 'center' }}>
+        <View className="flex-1 items-center">
           <TouchableOpacity
-            style={styles.navItem}
+            className="items-center justify-center mb-1"
             onPress={() => navigateTo('home')}
             onPressIn={() => handlePressIn('home')}
             onPressOut={handlePressOut}>
@@ -91,13 +82,13 @@ const Home = () => {
               size={35}
               color={getIconColor('home')}
             />
-            <Text style={styles.navLabel}>Home</Text>
+            <Text className="text-gray-400 text-sm mt-1 text-center">Home</Text>
           </TouchableOpacity>
         </View>
 
-        <View style={{ flex: 1, alignItems: 'center' }}>
+        <View className="flex-1 items-center">
           <TouchableOpacity
-            style={styles.navItem}
+            className="items-center justify-center mb-1"
             onPress={() => navigateTo('previousworkout')}
             onPressIn={() => handlePressIn('previousworkout')}
             onPressOut={handlePressOut}>
@@ -106,13 +97,13 @@ const Home = () => {
               size={35}
               color={getIconColor('previousworkout')}
             />
-            <Text style={styles.navLabel}>Log</Text>
+            <Text className="text-gray-400 text-sm mt-1 text-center">Log</Text>
           </TouchableOpacity>
         </View>
 
-        <View style={{ flex: 1, alignItems: 'center' }}>
+        <View className="flex-1 items-center">
           <TouchableOpacity
-            style={styles.navItem}
+            className="items-center justify-center mb-1"
             onPress={() => navigateTo('dataanalytics')}
             onPressIn={() => handlePressIn('dataanalytics')}
             onPressOut={handlePressOut}>
@@ -121,43 +112,12 @@ const Home = () => {
               size={35}
               color={getIconColor('dataanalytics')}
             />
-            <Text style={styles.navLabel}>Analysis</Text>
+            <Text className="text-gray-400 text-sm mt-1 text-center">Analysis</Text>
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#121212',
-  },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  navBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#1a1a1a',
-    height: 100,
-    paddingHorizontal: 12,
-  },
-  navItem: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 5,
-  },
-  navLabel: {
-    color: '#cccccc',
-    fontSize: 14,
-    marginTop: 6,
-    textAlign: 'center',
-  },
-});
-
 export default Home;
-
