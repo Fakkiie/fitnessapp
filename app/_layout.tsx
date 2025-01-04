@@ -1,15 +1,15 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import Home from './index';
+import { Stack } from 'expo-router';
+import { NativeWindStyleSheet } from 'nativewind';
+import { PaperProvider } from 'react-native-paper';
 
-const Stack = createStackNavigator();
+NativeWindStyleSheet.setOutput({
+  default: 'native',
+});
 
-export default function App() {
+export default function Layout() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Home" component={Home} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <PaperProvider>
+      <Stack screenOptions={{ headerShown: false }} />
+    </PaperProvider>
   );
 }
