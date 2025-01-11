@@ -3,17 +3,15 @@ module.exports = (api) => {
   return {
     presets: ['babel-preset-expo'],
     plugins: [
-      'nativewind/babel',
       [
         'module-resolver',
         {
           alias: {
-            // This needs to be mirrored in tsconfig.json
-            '@': './src',
+            '@': './src', // Path alias
           },
         },
       ],
-      require.resolve('expo-router/babel'),
+      'nativewind/babel',
     ],
   };
 };

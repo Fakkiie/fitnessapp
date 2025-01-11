@@ -32,7 +32,12 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["app/src/*"]
-    }
+    },
+
+    // Add these for React Type-Checking
+    "types": ["react", "react-native"],
+    "jsxFactory": "React.createElement",
+    "jsxFragmentFactory": "React.Fragment"
   },
   "exclude": ["./node_modules/**/*", "e2e/**/*.ts"],
   "extends": "expo/tsconfig.base"
