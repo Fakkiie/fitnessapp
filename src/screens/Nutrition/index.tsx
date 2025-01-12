@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
+import { useNavigation } from '@react-navigation/native';
 import {
   ScrollView,
   StyleSheet,
@@ -22,9 +23,11 @@ const getCurrentDate = () => {
   return `Today: ${new Intl.DateTimeFormat('en-US', options).format(today)}`;
 };
 
-export default function MyScreen({ navigation }: { navigation: any }) {
+export default function MyScreen() {
+  const navigation = useNavigation();
+
   const handleAddMealPress = () => {
-    navigation.navigate('AddMeal');
+    navigation.navigate('AddMeal' as never);
   };
 
   return (

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
+import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import {
   KeyboardAvoidingView,
@@ -13,13 +14,15 @@ import {
 import { useMacros } from '../../components/MacrosContext'; // Import the useMacros hook
 
 // Add Meal Screen Component
-export default function AddMealScreen({ navigation }: { navigation: any }) {
+export default function AddMealScreen() {
   const [protein, setProtein] = useState('');
   const [fat, setFat] = useState('');
   const [carbs, setCarbs] = useState('');
   const [calories, setCalories] = useState('');
 
   const { addMacros } = useMacros();
+
+  const navigation = useNavigation();
 
   const handleNumericInput = (
     value: string,
@@ -46,7 +49,7 @@ export default function AddMealScreen({ navigation }: { navigation: any }) {
     setCarbs('');
     setCalories('');
 
-    navigation.navigate('NutritionMain');
+    navigation.goBack();
   };
 
   return (
