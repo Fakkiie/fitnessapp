@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import tw from 'twrnc';
 
 import Nutrition from '../../components/caloriecounter';
 import Macro from '../../components/macrocounter';
@@ -32,80 +27,40 @@ export default function NutritionMainScreen({
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#141414' }}>
+    <View style={tw`flex-1 bg-[#141414]`}>
       <ScrollView
-        contentContainerStyle={{ flexGrow: 1 }}
+        contentContainerStyle={tw`flex-grow`}
         showsVerticalScrollIndicator={false}
       >
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={tw`flex-1`}>
           <Nutrition />
         </SafeAreaView>
 
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={tw`flex-1`}>
           <Macro />
         </SafeAreaView>
 
-        <View style={styles.greyBox} />
-        <View style={styles.greyBox2} />
+        <View
+          style={tw`absolute top-[475px] left-[20px] w-[42.5%] h-[180px] bg-[#333333] rounded-lg`}
+        />
+        <View
+          style={tw`absolute top-[475px] left-[210px] w-[42.5%] h-[180px] bg-[#333333] rounded-lg`}
+        />
 
-        <Text style={styles.dateText}>{getCurrentDate()}</Text>
+        <Text
+          style={tw`absolute top-[55px] left-[20px] text-[18px] font-bold text-white z-10`}
+        >
+          {getCurrentDate()}
+        </Text>
       </ScrollView>
 
-      {/* Floating Action Button (FAB) */}
-      <TouchableOpacity style={styles.fab} onPress={handleAddMealPress}>
-        <Text style={styles.addMealButtonText}>+ Add Meal</Text>
+      {/* fab */}
+      <TouchableOpacity
+        style={tw`absolute bottom-[30px] right-[20px] w-[90%] h-[80px] bg-red-500 rounded-full justify-center items-center shadow-lg`}
+        onPress={handleAddMealPress}
+      >
+        <Text style={tw`text-white text-[20px] font-bold`}>+ Add Meal</Text>
       </TouchableOpacity>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  greyBox: {
-    position: 'absolute',
-    top: 475,
-    left: 20,
-    width: '42.5%',
-    height: 180,
-    backgroundColor: '#333333',
-    borderRadius: 10,
-  },
-  greyBox2: {
-    position: 'absolute',
-    top: 475,
-    left: 210,
-    width: '42.5%',
-    height: 180,
-    backgroundColor: '#333333',
-    borderRadius: 10,
-  },
-  dateText: {
-    position: 'absolute',
-    top: 55,
-    left: 20,
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#fff',
-    zIndex: 1,
-  },
-  fab: {
-    position: 'absolute',
-    bottom: 30, // Adjust to be a little above the bottom of the screen
-    right: 20, // Adjust to be a little away from the right edge
-    width: '90%',
-    height: 80,
-    backgroundColor: 'red',
-    borderRadius: 35, // Circular shape
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000', // Shadow for a floating effect
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 6,
-    elevation: 6, // Elevation for Android to give the floating effect
-  },
-  addMealButtonText: {
-    color: '#fff',
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-});

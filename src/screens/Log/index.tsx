@@ -1,26 +1,14 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import tw from 'twrnc';
 
 export function Log() {
   return (
-    <View style={[styles.container, { backgroundColor: '#141414' }]}>
-      {/* Title at the top */}
-      <Text style={styles.title}>Log Screen</Text>
+    <View style={tw`flex-1 justify-center items-center bg-[#141414]`}>
+      <Text
+        style={tw`text-4xl font-semibold text-white text-center absolute top-12`}
+      >
+        Workout
+      </Text>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'flex-start', // Push title to the top
-    paddingTop: 50, // Add spacing from the top
-  },
-  title: {
-    fontSize: 24, // Change font size
-    fontWeight: 'bold', // Make it bold
-    color: 'white', // White text color
-    textAlign: 'center', // Center align the text
-  },
-});
