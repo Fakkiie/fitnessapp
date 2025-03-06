@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     height: 170, // Height of the box (adjust as needed)
     top: -40, // Position the box slightly lower
     padding: 20,
-    backgroundColor: '#222', // Slightly different color for the box
+    backgroundColor: '#333333', // Slightly different color for the box
     borderRadius: 10, // Rounded corners
     shadowColor: '#000', // Shadow for depth
     shadowOffset: { width: 0, height: 4 },

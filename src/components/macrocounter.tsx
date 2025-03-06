@@ -154,29 +154,32 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#fff',
     position: 'absolute',
-    top: -175, // Positioning text below the SVG circles
-    left: 40, // Adjust positioning as needed
+    top: -165, // Positioning text below the SVG circles
+    left: 50, // Adjust positioning as needed
+    fontWeight: 'bold',
   },
   carbsText: {
     fontSize: 18,
     color: '#fff',
     position: 'absolute',
-    top: -175, // Positioning text below the first text
-    left: 170, // Adjust positioning as needed
+    top: -165, // Positioning text below the first text
+    left: 175, // Adjust positioning as needed
+    fontWeight: 'bold',
   },
   fatsText: {
     fontSize: 18,
     color: '#fff',
     position: 'absolute',
-    top: -175, // Positioning text below the second text
-    left: 295, // Adjust positioning as needed
+    top: -165, // Positioning text below the second text
+    left: 300, // Adjust positioning as needed
+    fontWeight: 'bold',
   },
   remainingProteinsText: {
     fontSize: 24,
     color: '#fff',
     position: 'absolute',
-    top: -112, // Positioning text below the Proteins label
-    left: 40, // Adjust positioning as needed
+    top: -108, // Positioning text below the Proteins label
+    left: 43, // Adjust positioning as needed
     width: 80, // Adjust width to create space for larger values like 100g
     textAlign: 'center', // Center align text to prevent shifting
   },
@@ -184,8 +187,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: '#fff',
     position: 'absolute',
-    top: -112, // Positioning text below the Carbs label
-    left: 160, // Adjust positioning as needed
+    top: -108, // Positioning text below the Carbs label
+    left: 162, // Adjust positioning as needed
     width: 80, // Adjust width to create space for larger values like 100g
     textAlign: 'center', // Center align text to prevent shifting
   },
@@ -193,8 +196,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: '#fff',
     position: 'absolute',
-    top: -112, // Positioning text below the Fats label
-    left: 275, // Adjust positioning as needed
+    top: -108, // Positioning text below the Fats label
+    left: 280, // Adjust positioning as needed
     width: 80, // Adjust width to create space for larger values like 100g
     textAlign: 'center', // Center align text to prevent shifting
   },
@@ -203,20 +206,20 @@ const styles = StyleSheet.create({
     color: '#fff',
     position: 'absolute',
     top: -80, // Positioning text below the Fats label
-    left: 303, // Adjust positioning as needed
+    left: 307, // Adjust positioning as needed
   },
   leftTextTwo: {
     fontSize: 15,
     color: '#fff',
     position: 'absolute',
     top: -80, // Positioning text below the Fats label
-    left: 187, // Adjust positioning as needed
+    left: 190, // Adjust positioning as needed
   },
   leftTextThree: {
     fontSize: 15,
     color: '#fff',
     position: 'absolute',
     top: -80, // Positioning text below the Fats label
-    left: 67, // Adjust positioning as needed
+    left: 70, // Adjust positioning as needed
   },
 });

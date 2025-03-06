@@ -22,15 +22,17 @@ const getCurrentDate = () => {
   return `Today: ${new Intl.DateTimeFormat('en-US', options).format(today)}`;
 };
 
-export default function MyScreen({ navigation }: { navigation: any }) {
+export default function NutritionMainScreen({
+  navigation,
+}: {
+  navigation: any;
+}) {
   const handleAddMealPress = () => {
     navigation.navigate('AddMeal');
   };
 
   return (
     <View style={{ flex: 1, backgroundColor: '#141414' }}>
-      <Text style={styles.dateText}>{getCurrentDate()}</Text>
-
       <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
         showsVerticalScrollIndicator={false}
@@ -44,15 +46,15 @@ export default function MyScreen({ navigation }: { navigation: any }) {
         </SafeAreaView>
 
         <View style={styles.greyBox} />
+        <View style={styles.greyBox2} />
 
-        {/* Add Meal Button */}
-        <TouchableOpacity
-          style={styles.addMealButton}
-          onPress={handleAddMealPress}
-        >
-          <Text style={styles.addMealButtonText}>+ Add Meal</Text>
-        </TouchableOpacity>
+        <Text style={styles.dateText}>{getCurrentDate()}</Text>
       </ScrollView>
+
+      {/* Floating Action Button (FAB) */}
+      <TouchableOpacity style={styles.fab} onPress={handleAddMealPress}>
+        <Text style={styles.addMealButtonText}>+ Add Meal</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -60,11 +62,20 @@ export default function MyScreen({ navigation }: { navigation: any }) {
 const styles = StyleSheet.create({
   greyBox: {
     position: 'absolute',
-    top: 453,
+    top: 475,
     left: 20,
-    width: '90%',
-    height: 200,
-    backgroundColor: '#4B4B4B',
+    width: '42.5%',
+    height: 180,
+    backgroundColor: '#333333',
+    borderRadius: 10,
+  },
+  greyBox2: {
+    position: 'absolute',
+    top: 475,
+    left: 210,
+    width: '42.5%',
+    height: 180,
+    backgroundColor: '#333333',
     borderRadius: 10,
   },
   dateText: {
@@ -76,20 +87,25 @@ const styles = StyleSheet.create({
     color: '#fff',
     zIndex: 1,
   },
-  addMealButton: {
+  fab: {
     position: 'absolute',
-    top: 670,
-    left: 20,
-    backgroundColor: 'red',
+    bottom: 30, // Adjust to be a little above the bottom of the screen
+    right: 20, // Adjust to be a little away from the right edge
     width: '90%',
     height: 80,
-    borderRadius: 10,
+    backgroundColor: 'red',
+    borderRadius: 35, // Circular shape
     justifyContent: 'center',
     alignItems: 'center',
+    shadowColor: '#000', // Shadow for a floating effect
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 6, // Elevation for Android to give the floating effect
   },
   addMealButtonText: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: 'bold',
   },
 });

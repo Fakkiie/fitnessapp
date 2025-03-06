@@ -1,7 +1,7 @@
 import { createStackNavigator } from '@react-navigation/stack';
 
 import AddMealScreen from '../screens/alternative/addmeal';
-import NutritionMainScreen from '../screens/Nutrition';
+import NutritionMainScreen from '../screens/Nutrition/index';
 import { MacrosProvider } from './MacrosContext';
 
 const Stack = createStackNavigator();
@@ -13,6 +13,7 @@ const NutritionStack = () => {
         initialRouteName="NutritionMain"
         screenOptions={{
           headerShown: false,
+          gestureEnabled: false,
         }}
       >
         <Stack.Screen name="NutritionMain" component={NutritionMainScreen} />

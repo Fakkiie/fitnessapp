@@ -1,8 +1,8 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
 import { Icon } from 'react-native-paper';
+import NutritionStack from 'src/components/nutritionstack';
 
-import NutritionStack from '../src/components/nutritionstack'; // Import the stack navigator for Nutrition
+// Import the stack navigator for Nutrition
 import { Analysis } from '../src/screens/Analysis';
 import { Goals } from '../src/screens/Goals';
 import { Home } from '../src/screens/Home';
@@ -28,59 +28,57 @@ const AnalysisIcon = (props: { focused: any }) => (
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        initialRouteName="Home"
-        screenOptions={{
-          headerShown: false,
-          tabBarStyle: { backgroundColor: '#1E1E1E' },
-          tabBarInactiveTintColor: 'white',
-          tabBarActiveTintColor: 'red',
-          tabBarLabelStyle: { fontSize: 12 },
+    <Tab.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        headerShown: false,
+        tabBarStyle: { backgroundColor: '#1E1E1E' },
+        tabBarInactiveTintColor: 'white',
+        tabBarActiveTintColor: 'red',
+        tabBarLabelStyle: { fontSize: 12 },
+      }}
+    >
+      <Tab.Screen
+        name="Goals"
+        options={{
+          tabBarIcon: GoalsIcon,
+          tabBarLabelStyle: { color: 'white' },
         }}
-      >
-        <Tab.Screen
-          name="Goals"
-          options={{
-            tabBarIcon: GoalsIcon,
-            tabBarLabelStyle: { color: 'white' },
-          }}
-          component={Goals}
-        />
-        <Tab.Screen
-          name="Workout"
-          options={{
-            tabBarIcon: LogsIcon,
-            tabBarLabelStyle: { color: 'white' },
-          }}
-          component={Log}
-        />
-        <Tab.Screen
-          name="Home"
-          options={{
-            tabBarIcon: HomeIcon,
-            tabBarLabelStyle: { color: 'white' },
-          }}
-          component={Home}
-        />
-        <Tab.Screen
-          name="Nutrition"
-          options={{
-            tabBarIcon: NutritionIcon,
-            tabBarLabelStyle: { color: 'white' },
-          }}
-          component={NutritionStack} // Use the stack navigator for Nutrition
-        />
-        <Tab.Screen
-          name="Analysis"
-          options={{
-            tabBarIcon: AnalysisIcon,
-            tabBarLabelStyle: { color: 'white' },
-          }}
-          component={Analysis}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
+        component={Goals}
+      />
+      <Tab.Screen
+        name="Workout"
+        options={{
+          tabBarIcon: LogsIcon,
+          tabBarLabelStyle: { color: 'white' },
+        }}
+        component={Log}
+      />
+      <Tab.Screen
+        name="Home"
+        options={{
+          tabBarIcon: HomeIcon,
+          tabBarLabelStyle: { color: 'white' },
+        }}
+        component={Home}
+      />
+      <Tab.Screen
+        name="Nutrition"
+        options={{
+          tabBarIcon: NutritionIcon,
+          tabBarLabelStyle: { color: 'white' },
+        }}
+        component={NutritionStack} // Use the stack navigator for Nutrition
+      />
+      <Tab.Screen
+        name="Analysis"
+        options={{
+          tabBarIcon: AnalysisIcon,
+          tabBarLabelStyle: { color: 'white' },
+        }}
+        component={Analysis}
+      />
+    </Tab.Navigator>
   );
 };
 
