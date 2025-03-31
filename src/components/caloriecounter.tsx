@@ -20,83 +20,82 @@ export default function Nutrition() {
   const strokeDasharray = circumference * (percentage / 100);
 
   return (
-    <View className="flex-1 items-center justify-center bg-[#141414]">
+    <View className="flex items-center justify-center bg-[#141414]">
       {/* Box with a slightly different color */}
-      <View className="-top-10 h-[170px] w-[90%] rounded-lg bg-[#333333] p-5 shadow-md shadow-black">
-        <Svg width="120" height="130" viewBox="0 0 120 130">
-          {/* Background circle */}
-          <Circle
-            cx="60"
-            cy="70"
-            r="50"
-            stroke="#fff"
-            strokeWidth="11"
-            fill="none"
-          />
-          {/* Progress circle */}
-          <Circle
-            cx="60"
-            cy="70"
-            r="50"
-            stroke="#FF0000"
-            strokeWidth="11"
-            fill="none"
-            strokeDasharray={`${strokeDasharray} ${circumference - strokeDasharray}`}
-            strokeDashoffset={75} // Start position
-            strokeLinecap="round"
-          />
-        </Svg>
-
-        {/* Calories Information */}
-        <View className="-top-[140px] left-[140px] mt-5 items-start justify-center px-5">
-          <View className="mb-3 flex-row items-center">
-            <FontAwesome
-              name="flag"
-              size={20}
-              color="#00FFFF"
-              className="top-[15px] mr-2"
-            />
-            <Text className="top-[15px] text-lg font-bold text-white">
-              Goal: {goalCalories}
-            </Text>
+      <View className="mx-10 mt-5 flex h-fit flex-col items-center rounded-lg bg-[#333333] py-4 shadow-md shadow-black">
+        <Text className="text-xl font-bold text-white">Calories</Text>
+        <View className="mx-4 mb-4 flex flex-row items-center justify-between">
+          <View className="relative flex flex-col items-center justify-center">
+            <Svg width="120" height="130" viewBox="0 0 120 130">
+              {/* Background circle */}
+              <Circle
+                cx="60"
+                cy="70"
+                r="50"
+                stroke="#fff"
+                strokeWidth="11"
+                fill="none"
+              />
+              {/* Progress circle */}
+              <Circle
+                cx="60"
+                cy="70"
+                r="50"
+                stroke="#FF0000"
+                strokeWidth="11"
+                fill="none"
+                strokeDasharray={`${strokeDasharray} ${circumference - strokeDasharray}`}
+                strokeDashoffset={75} // Start position
+                strokeLinecap="round"
+              />
+            </Svg>
+            {/* Remaining Calories */}
+            <View className="absolute top-12">
+              <Text className="text-xs font-bold text-white">Remaining</Text>
+              <Text className="text-center text-2xl font-bold text-white">
+                {caloriesLeft}
+              </Text>
+            </View>
           </View>
 
-          <View className="mb-3 flex-row items-center">
-            <FontAwesome
-              name="cutlery"
-              size={20}
-              color="#00FFFF"
-              className="top-[15px] mr-2"
-            />
-            <Text className="top-[15px] text-lg font-bold text-white">
-              Eaten: {caloriesEaten}
-            </Text>
-          </View>
+          {/* Calories Information */}
+          <View className="mt-5 items-start justify-center px-5">
+            <View className="mb-3 flex flex-row items-center gap-2">
+              <FontAwesome
+                name="flag"
+                size={20}
+                color="#00FFFF"
+                className="mr-2"
+              />
+              <Text className="text-lg font-bold text-white">
+                Goal: {goalCalories}
+              </Text>
+            </View>
 
-          <View className="mb-3 flex-row items-center">
-            <FontAwesome
-              name="heart"
-              size={20}
-              color="#00FFFF"
-              className="top-[15px] mr-2"
-            />
-            <Text className="top-[15px] text-lg font-bold text-white">
-              Exercise: {caloriesBurned}
-            </Text>
-          </View>
-        </View>
+            <View className="mb-3 flex flex-row items-center gap-2">
+              <FontAwesome
+                name="cutlery"
+                size={20}
+                color="#00FFFF"
+                className="mr-2"
+              />
+              <Text className="text-lg font-bold text-white">
+                Eaten: {caloriesEaten}
+              </Text>
+            </View>
 
-        {/* Remaining Calories */}
-        <View className="mt-5 items-center">
-          <Text className="-top-[210px] left-[-98px] text-xs font-bold text-white">
-            Remaining
-          </Text>
-          <Text className="-top-[253px] left-[-100px] text-center text-2xl font-bold text-white">
-            {caloriesLeft}
-          </Text>
-          <Text className="absolute -top-[300px] left-[110px] text-xl font-bold text-white">
-            Calories:
-          </Text>
+            <View className="mb-3 flex flex-row items-center gap-2">
+              <FontAwesome
+                name="heart"
+                size={20}
+                color="#00FFFF"
+                className="mr-2"
+              />
+              <Text className="text-lg font-bold text-white">
+                Exercise: {caloriesBurned}
+              </Text>
+            </View>
+          </View>
         </View>
       </View>
     </View>
