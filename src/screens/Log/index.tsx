@@ -3,7 +3,7 @@ import tw from 'twrnc';
 
 export function Log() {
   return (
-    <View style={tw`flex-2 bg-[#141414]`}>
+    <View className="flex-1 items-center justify-center bg-base-100">
       <ScrollView contentContainerStyle={tw`grow justify-center items-center `}>
         <Text className="absolute left-8 top-32 z-10 text-center text-2xl font-semibold text-white">
           Workout Library

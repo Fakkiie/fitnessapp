@@ -31,34 +31,36 @@ export default function Macro() {
 			style={tw`flex flex-col bg-[#333333] mx-4 rounded-lg py-10 h-fit justify-center items-center`}
 		>
 			{/* SVG with progress circles */}
-			<View style={tw`border border-blue-500 flex flex-row gap-10`}>
+			<View style={tw`flex flex-row gap-10`}>
 				<View className="flex flex-col items-center justify-center">
-					<Svg className="h-20 w-20 flex items-center justify-center relative">
-						{/* Background circle 1 */}
-						<Circle
-							cx="50%"
-							cy="50%"
-							r="32.5"
-							stroke="#fff"
-							strokeWidth="8"
-							fill="none"
-						/>
-						{/* Progress circle 1 */}
-						<Circle
-							cx="50%"
-							cy="50%"
-							r="32.5"
-							stroke="#3CB371"
-							strokeWidth="8"
-							fill="none"
-							strokeDasharray={`${calculateDashArray(totalCarbs, goalCarbs)} ${2 * Math.PI * 32.5 - calculateDashArray(totalCarbs, goalCarbs)}`}
-							strokeDashoffset={50} // Start position
-							strokeLinecap="round"
-						/>
-						<Text className="text-xl text-white text-center">
+					<View className="relative h-fit flex items-center justify-center">
+						<Svg className="h-20 w-20 flex items-center justify-center">
+							{/* Background circle 1 */}
+							<Circle
+								cx="50%"
+								cy="50%"
+								r="32.5"
+								stroke="#fff"
+								strokeWidth="8"
+								fill="none"
+							/>
+							{/* Progress circle 1 */}
+							<Circle
+								cx="50%"
+								cy="50%"
+								r="32.5"
+								stroke="#3CB371"
+								strokeWidth="8"
+								fill="none"
+								strokeDasharray={`${calculateDashArray(totalCarbs, goalCarbs)} ${2 * Math.PI * 32.5 - calculateDashArray(totalCarbs, goalCarbs)}`}
+								strokeDashoffset={50} // Start position
+								strokeLinecap="round"
+							/>
+						</Svg>
+						<Text className="text-xl text-white text-center absolute">
 							{remainingProteins}g
 						</Text>
-					</Svg>
+					</View>
 					{/* Text for Proteins */}
 					<Text style={tw`text-lg text-white font-bold`}>
 						Proteins
@@ -67,65 +69,69 @@ export default function Macro() {
 				</View>
 
 				<View className="flex flex-col items-center justify-center">
-					<Svg className="h-20 w-20 flex-1 flex-col items-center justify-center">
-						{/* Background circle 1 */}
-						<Circle
-							cx="50%"
-							cy="50%"
-							r="32.5"
-							stroke="#fff"
-							strokeWidth="8"
-							fill="none"
-						/>
-						{/* Progress circle 1 */}
-						<Circle
-							cx="50%"
-							cy="50%"
-							r="32.5"
-							stroke="#3CB371"
-							strokeWidth="8"
-							fill="none"
-							strokeDasharray={`${calculateDashArray(totalFat, goalFats)} ${2 * Math.PI * 32.5 - calculateDashArray(totalFat, goalFats)}`}
-							strokeDashoffset={50} // Start position
-							strokeLinecap="round"
-						/>
+					<View className="relative h-fit flex items-center justify-center">
+						<Svg className="h-20 w-20 flex items-center justify-center">
+							{/* Background circle 1 */}
+							<Circle
+								cx="50%"
+								cy="50%"
+								r="32.5"
+								stroke="#fff"
+								strokeWidth="8"
+								fill="none"
+							/>
+							{/* Progress circle 1 */}
+							<Circle
+								cx="50%"
+								cy="50%"
+								r="32.5"
+								stroke="#3CB371"
+								strokeWidth="8"
+								fill="none"
+								strokeDasharray={`${calculateDashArray(totalFat, goalFats)} ${2 * Math.PI * 32.5 - calculateDashArray(totalFat, goalFats)}`}
+								strokeDashoffset={50} // Start position
+								strokeLinecap="round"
+							/>
+						</Svg>
 						{/* Text for remaining Carbs */}
-						<Text className="text-xl text-white text-center block">
+						<Text className="text-xl text-white text-center absolute">
 							{remainingCarbs}g
 						</Text>
-					</Svg>
+					</View>
 					{/* Text for Carbs */}
 					<Text style={tw`text-lg text-white font-bold`}>Carbs</Text>
 				</View>
 
 				<View className="flex flex-col items-center justify-center">
-					<Svg className="h-20 w-20 flex-1 items-center justify-center">
-						{/* Background circle 1 */}
-						<Circle
-							cx="50%"
-							cy="50%"
-							r="32.5"
-							stroke="#fff"
-							strokeWidth="8"
-							fill="none"
-						/>
-						{/* Progress circle 1 */}
-						<Circle
-							cx="50%"
-							cy="50%"
-							r="32.5"
-							stroke="#3CB371"
-							strokeWidth="8"
-							fill="none"
-							strokeDasharray={`${calculateDashArray(totalProtein, goalProteins)} ${2 * Math.PI * 32.5 - calculateDashArray(totalProtein, goalProteins)}`}
-							strokeDashoffset={50} // Start position
-							strokeLinecap="round"
-						/>
+					<View className="relative h-fit flex items-center justify-center">
+						<Svg className="h-20 w-20 flex items-center justify-center">
+							{/* Background circle 1 */}
+							<Circle
+								cx="50%"
+								cy="50%"
+								r="32.5"
+								stroke="#fff"
+								strokeWidth="8"
+								fill="none"
+							/>
+							{/* Progress circle 1 */}
+							<Circle
+								cx="50%"
+								cy="50%"
+								r="32.5"
+								stroke="#3CB371"
+								strokeWidth="8"
+								fill="none"
+								strokeDasharray={`${calculateDashArray(totalProtein, goalProteins)} ${2 * Math.PI * 32.5 - calculateDashArray(totalProtein, goalProteins)}`}
+								strokeDashoffset={50} // Start position
+								strokeLinecap="round"
+							/>
+						</Svg>
 						{/* Text for remaining Fats */}
-						<Text className="text-xl text-white text-center">
+						<Text className="text-xl text-white text-center absolute">
 							{remainingFats}g
 						</Text>
-					</Svg>
+					</View>
 					{/* Text for Fats */}
 					<Text style={tw`text-lg text-white font-bold`}>Fats</Text>
 				</View>

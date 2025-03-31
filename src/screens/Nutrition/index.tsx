@@ -27,22 +27,20 @@ export default function NutritionMainScreen({
   };
 
   return (
-    <View style={tw`bg-[#141414] flex-1 p-4`}>
+    <View className="flex-1 bg-base-100 p-4">
       <ScrollView
         contentContainerStyle={tw`flex flex-col`}
         showsVerticalScrollIndicator={false}
       >
-        <SafeAreaView className="h-fit flex-1 border">
+        <SafeAreaView className="h-fit flex-1">
           <Nutrition />
         </SafeAreaView>
 
-        <SafeAreaView className="h-fit flex-1 border">
+        <SafeAreaView className="h-fit flex-1">
           <Macro />
         </SafeAreaView>
 
-        <Text
-          style={tw`absolute top-[55px] left-[20px] text-[18px] font-bold text-white z-10`}
-        >
+        <Text className="absolute left-[20px] top-[55px] z-10 text-lg font-bold text-white">
           {getCurrentDate()}
         </Text>
       </ScrollView>
