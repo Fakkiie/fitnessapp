@@ -1,14 +1,30 @@
-import { Text, View } from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import tw from 'twrnc';
 
 export function Log() {
   return (
-    <View style={tw`flex-1 justify-center items-center bg-[#141414]`}>
-      <Text
-        style={tw`text-4xl font-semibold text-white text-center absolute top-12`}
+    <View style={tw`flex-2 bg-[#141414]`}>
+      <ScrollView contentContainerStyle={tw`grow justify-center items-center `}>
+        <Text className="absolute left-8 top-32 z-10 text-center text-2xl font-semibold text-white">
+          Workout Library
+        </Text>
+        <Text
+          style={tw`text-2xl font-semibold text-white text-center absolute top-300 left-8 z-2`}
+        >
+          Penis
+        </Text>
+        <View
+          style={tw`center top-[110px] left-[0px] w-[92%] h-[1500px] bg-[#333333] rounded-lg`}
+        />
+      </ScrollView>
+
+      {/* fab */}
+      <TouchableOpacity
+        style={tw`absolute bottom-[30px] right-[20px] w-[90%] h-[80px] bg-red-500 rounded-full justify-center items-center shadow-lg`}
+        onPress={() => console.log('Add Workout')}
       >
-        Workout
-      </Text>
+        <Text style={tw`text-white text-[20px] font-bold`}>Log Workout</Text>
+      </TouchableOpacity>
     </View>
   );
 }

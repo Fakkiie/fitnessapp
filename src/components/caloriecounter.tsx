@@ -88,14 +88,14 @@ export default function Nutrition() {
 
         {/* Remaining Calories */}
         <View className="mt-5 items-center">
-          <Text className="-top-[200px] left-[-98px] text-xs font-bold text-white">
+          <Text className="-top-[210px] left-[-98px] text-xs font-bold text-white">
             Remaining
           </Text>
-          <Text className="-top-[243px] left-[-98px] text-center text-2xl font-bold text-white">
+          <Text className="-top-[253px] left-[-100px] text-center text-2xl font-bold text-white">
             {caloriesLeft}
           </Text>
-          <Text className="absolute -top-[290px] left-[110px] text-xl font-bold text-white">
-            Calories
+          <Text className="absolute -top-[300px] left-[110px] text-xl font-bold text-white">
+            Calories:
           </Text>
         </View>
       </View>
