@@ -20,9 +20,9 @@ export default function Nutrition() {
 	const strokeDasharray = circumference * (percentage / 100);
 
 	return (
-		<View className="flex items-center justify-center bg-[#141414]">
+		<View className="flex items-center justify-center h-fit">
 			{/* Box with a slightly different color */}
-			<View className="mt-5 mx-10 py-4 h-fit flex flex-col items-center rounded-lg bg-[#333333] shadow-md shadow-black">
+			<View className="mt-5 mx-10 py-4 h-fit flex flex-col items-center rounded-lg bg-base-200">
 				<Text className="text-xl font-bold text-white">Calories</Text>
 				<View className="flex flex-row items-center justify-between mx-4 mb-4">
 					<View className="flex flex-col items-center justify-center relative">
