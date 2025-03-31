@@ -40,7 +40,7 @@ export default function NutritionMainScreen({
 					<Macro />
 				</SafeAreaView>
 
-				<Text className="absolute top-[55px] left-[20px] font-bold text-white z-10 text-lg">
+				<Text className="absolute top-[55px] left-5 font-bold text-white z-10 text-lg">
 					{getCurrentDate()}
 				</Text>
 			</ScrollView>
