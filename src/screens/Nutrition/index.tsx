@@ -3,8 +3,8 @@ import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import tw from "twrnc";
 
-import Nutrition from "../../components/caloriecounter";
-import Macro from "../../components/macrocounter";
+import Nutrition from "../../components/Nutrition";
+import Macro from "../../components/Macro";
 
 const getCurrentDate = () => {
 	const today = new Date();
@@ -27,27 +27,22 @@ export default function NutritionMainScreen({
 	};
 
 	return (
-		<View className="bg-base-100 flex-1 p-4">
+		<View className='bg-base-100 flex flex-col px-4 py-10 h-full'>
+			<Text className='mt-16 mx-8 font-bold text-neutral z-10 text-lg h-fit'>
+				{getCurrentDate()}
+			</Text>
 			<ScrollView
-				contentContainerStyle={tw`flex flex-col`}
+				contentContainerStyle={tw`flex flex-col gap-10 my-10`}
 				showsVerticalScrollIndicator={false}
 			>
-				<SafeAreaView className="h-fit flex-1">
-					<Nutrition />
-				</SafeAreaView>
+				<Nutrition />
 
-				<SafeAreaView className="h-fit flex-1">
-					<Macro />
-				</SafeAreaView>
-
-				<Text className="absolute top-[55px] left-5 font-bold text-white z-10 text-lg">
-					{getCurrentDate()}
-				</Text>
+				<Macro />
 			</ScrollView>
 
 			{/* fab */}
 			<TouchableOpacity
-				style={tw`w-[90%] mx-auto h-[80px] bg-red-500 rounded-full justify-center items-center shadow-lg`}
+				className='w-[90%] mx-auto h-20 bg-primary rounded-full justify-center items-center shadow-lg'
 				onPress={handleAddMealPress}
 			>
 				<Text style={tw`text-white text-[20px] font-bold`}>

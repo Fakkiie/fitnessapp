@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+   --primary: #0D7377;
+   --primary-content: #323232;
+   --secondary: #14FFEC;
+   --secondary-content: #323232;
+   --base100: #212121;
+   --base200: #323232;
+   --base300: #d3d3d3;
+   --neutral: #ECF0F1;
+   --neutral-content: #323232;
+   --success: #A5DD9B;
+   --danger: #FF8080;
+   --warning: #F6F193;
+   --info: "#7BD3EA"
+}
