@@ -1,12 +1,12 @@
 import { createStackNavigator } from '@react-navigation/stack';
 
+import { MacrosProvider } from '../components/MacrosContext';
 import AddMealScreen from '../screens/alternative/addmeal';
 import NutritionMainScreen from '../screens/Nutrition/index';
-import { MacrosProvider } from './MacrosContext';
 
 const Stack = createStackNavigator();
 
-const NutritionStack = () => {
+export default function NutritionStack() {
   return (
     <MacrosProvider>
       <Stack.Navigator
@@ -21,6 +21,4 @@ const NutritionStack = () => {
       </Stack.Navigator>
     </MacrosProvider>
   );
-};
-
-export default NutritionStack;
+}

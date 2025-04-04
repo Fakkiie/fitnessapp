@@ -1,17 +1,18 @@
-import { Text, View } from "react-native";
-import MuscleAnatomyBack from "../../components/svg/MuscleAnatomyBack";
-import MuscleAnatomyFront from "src/components/svg/MuscleAnatomyFront";
+import { Text, View } from 'react-native';
+import MuscleAnatomyFront from 'src/components/svg/MuscleAnatomyFront';
+
+import MuscleAnatomyBack from '../../components/svg/MuscleAnatomyBack';
 
 export function Home() {
-	return (
-		<View className='flex-1 justify-center items-center bg-base-100'>
-			<Text className='text-4xl font-semibold text-neutral text-center absolute top-12'>
-				Lift Lab
-			</Text>
-			<View className='flex flex-row justify-between items-center gap-10'>
-				<MuscleAnatomyFront />
-				<MuscleAnatomyBack />
-			</View>
-		</View>
-	);
+  return (
+    <View className="flex-1 items-center justify-center bg-base-100">
+      <Text className="absolute top-12 text-center text-4xl font-semibold text-neutral">
+        Lift Lab
+      </Text>
+      <View className="flex flex-row items-center justify-between gap-10">
+        <MuscleAnatomyFront />
+        <MuscleAnatomyBack />
+      </View>
+    </View>
+  );
 }

@@ -1,30 +1,23 @@
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import tw from 'twrnc';
+import { Text, TouchableOpacity, View } from 'react-native';
 
-export function Log() {
+export function Log({ navigation }: { navigation: any }) {
   return (
-    <View className="flex-1 items-center justify-center bg-base-100">
-      <ScrollView contentContainerStyle={tw`grow justify-center items-center `}>
-        <Text className="absolute left-8 top-32 z-10 text-center text-2xl font-semibold text-white">
-          Workout Library
-        </Text>
-        <Text
-          style={tw`text-2xl font-semibold text-white text-center absolute top-300 left-8 z-2`}
+    <View className="mt-auto flex h-full flex-col items-center justify-end bg-base-100 pb-10 pt-20">
+      <View className="w-[90%] space-y-4">
+        <TouchableOpacity
+          className="items-center justify-center rounded-lg border-2 border-primary p-4"
+          onPress={() => navigation.navigate('AddWorkout')}
         >
-          Penis
-        </Text>
-        <View
-          style={tw`center top-[110px] left-[0px] w-[92%] h-[1500px] bg-[#333333] rounded-lg`}
-        />
-      </ScrollView>
+          <Text className="text-lg font-semibold text-white">Log Workout</Text>
+        </TouchableOpacity>
 
-      {/* fab */}
-      <TouchableOpacity
-        style={tw`absolute bottom-[30px] right-[20px] w-[90%] h-[80px] bg-red-500 rounded-full justify-center items-center shadow-lg`}
-        onPress={() => console.log('Add Workout')}
-      >
-        <Text style={tw`text-white text-[20px] font-bold`}>Log Workout</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          className="items-center justify-center rounded-lg border-2 border-primary p-4"
+          onPress={() => navigation.navigate('ViewGrouped')}
+        >
+          <Text className="text-lg font-semibold text-white">View Grouped</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
