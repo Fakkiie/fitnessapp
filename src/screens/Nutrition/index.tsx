@@ -24,8 +24,8 @@ export default function NutritionMainScreen() {
 	const [modalVisible, setModalVisible] = useState(false);
 
 	return (
-		<View className='bg-base-100 flex flex-col px-4 py-10 h-full'>
-			<Text className='mt-16 mx-8 font-bold text-neutral z-10 text-lg h-fit'>
+		<View className='flex h-full flex-col bg-base-100 px-4 py-10'>
+			<Text className='z-10 mx-8 mt-16 h-fit text-lg font-bold text-neutral'>
 				{getCurrentDate()}
 			</Text>
 			<ScrollView

@@ -1,8 +1,8 @@
-import { Text, View } from "react-native";
-import MuscleAnatomyBack from "../../components/svg/MuscleAnatomyBack";
-import MuscleAnatomyFront from "src/components/svg/MuscleAnatomyFront";
-import MuscleAnatomyFemaleBack from "src/components/svg/MuscleAnatomyFemaleBack";
-import MuscleAnatomyFemaleFront from "src/components/svg/MuscleAnatomyFemaleFront";
+import { Text, View } from 'react-native';
+import MuscleAnatomyBack from '../../components/svg/MuscleAnatomyBack';
+import MuscleAnatomyFront from 'src/components/svg/MuscleAnatomyFront';
+import MuscleAnatomyFemaleBack from 'src/components/svg/MuscleAnatomyFemaleBack';
+import MuscleAnatomyFemaleFront from 'src/components/svg/MuscleAnatomyFemaleFront';
 
 export function Home() {
 	return (
