@@ -1,6 +1,8 @@
 import { Text, View } from "react-native";
 import MuscleAnatomyBack from "../../components/svg/MuscleAnatomyBack";
 import MuscleAnatomyFront from "src/components/svg/MuscleAnatomyFront";
+import MuscleAnatomyFemaleBack from "src/components/svg/MuscleAnatomyFemaleBack";
+import MuscleAnatomyFemaleFront from "src/components/svg/MuscleAnatomyFemaleFront";
 
 export function Home() {
 	return (
@@ -11,6 +13,10 @@ export function Home() {
 			<View className='flex flex-row justify-between items-center gap-10'>
 				<MuscleAnatomyFront />
 				<MuscleAnatomyBack />
+			</View>
+			<View className='flex flex-row justify-between items-center gap-10'>
+				<MuscleAnatomyFemaleFront />
+				<MuscleAnatomyFemaleBack />
 			</View>
 		</View>
 	);
