@@ -7,12 +7,11 @@ import {
 	KeyboardAvoidingView,
 	Platform,
 	TextInput,
-	Keyboard,
 	ScrollView,
 } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 
-import { Meal, storage, addMeal, loadMeals } from '../../storage/storage';
+import { Meal, storage, addMeal } from '../../storage/storage';
 import { useMacros } from '../../components/MacrosContext';
 
 import CollapsibleDropdown from '../CollapsableDropdown';
