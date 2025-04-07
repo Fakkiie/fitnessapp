@@ -1,56 +1,74 @@
 import React, { createContext, useContext, useState } from 'react';
+import { loadMacros, Macros, saveMacros } from 'src/storage/storage';
 
 interface MacrosContextType {
-  totalProtein: number;
-  totalFat: number;
-  totalCarbs: number;
-  totalCalories: number;
-  addMacros: (
-    protein: number,
-    fat: number,
-    carbs: number,
-    calories: number,
-  ) => void;
+	totalProtein: number;
+	totalFat: number;
+	totalCarbs: number;
+	totalCalories: number;
+	addMacros: (
+		protein: number,
+		fat: number,
+		carbs: number,
+		calories: number
+	) => void;
 }
 
 const MacrosContext = createContext<MacrosContextType | undefined>(undefined);
 
 export const useMacros = () => {
-  const context = useContext(MacrosContext);
-  if (!context) {
-    throw new Error('useMacros must be used within a MacrosProvider');
-  }
-  return context;
+	const context = useContext(MacrosContext);
+	if (!context) {
+		throw new Error('useMacros must be used within a MacrosProvider');
+	}
+	return context;
 };
 
 interface MacrosProviderProps {
-  children: React.ReactNode;
+	children: React.ReactNode;
 }
 
 export const MacrosProvider: React.FC<MacrosProviderProps> = ({ children }) => {
-  const [totalProtein, setTotalProtein] = useState(0);
-  const [totalFat, setTotalFat] = useState(0);
-  const [totalCarbs, setTotalCarbs] = useState(0);
-  const [totalCalories, setTotalCalories] = useState(0);
+	const initialMacros = loadMacros();
+	const [totalProtein, setTotalProtein] = useState(initialMacros.protein);
+	const [totalFat, setTotalFat] = useState(initialMacros.fat);
+	const [totalCarbs, setTotalCarbs] = useState(initialMacros.carbs);
+	const [totalCalories, setTotalCalories] = useState(initialMacros.calories);
 
-  const addMacros = (
-    protein: number,
-    fat: number,
-    carbs: number,
-    calories: number,
-  ) => {
-    setTotalProtein((prev) => prev + protein);
-    setTotalFat((prev) => prev + fat);
-    setTotalCarbs((prev) => prev + carbs);
-    setTotalCalories((prev) => prev + calories);
-  };
+	const addMacros = (
+		protein: number,
+		fat: number,
+		carbs: number,
+		calories: number
+	) => {
+		setTotalProtein((prev) => prev + protein);
+		setTotalFat((prev) => prev + fat);
+		setTotalCarbs((prev) => prev + carbs);
+		setTotalCalories((prev) => prev + calories);
 
-  const value = React.useMemo(
-    () => ({ totalProtein, totalFat, totalCarbs, totalCalories, addMacros }),
-    [totalProtein, totalFat, totalCarbs, totalCalories],
-  );
+		const macros: Macros = {
+			protein: protein,
+			fat: fat,
+			carbs: carbs,
+			calories: calories,
+		};
+		saveMacros(macros);
+	};
 
-  return (
-    <MacrosContext.Provider value={value}>{children}</MacrosContext.Provider>
-  );
+	const value = React.useMemo(
+		() => ({
+			totalProtein,
+			totalFat,
+			totalCarbs,
+			totalCalories,
+			addMacros,
+		}),
+		[totalProtein, totalFat, totalCarbs, totalCalories]
+	);
+
+	return (
+		<MacrosContext.Provider value={value}>
+			{children}
+		</MacrosContext.Provider>
+	);
 };

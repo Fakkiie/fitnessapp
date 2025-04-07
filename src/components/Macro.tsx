@@ -26,7 +26,7 @@ export default function Macro() {
 	const remainingFats = Math.max(goalFats - totalFat, 0);
 
 	return (
-		<View className='flex flex-col bg-base-100 mx-4 rounded-lg py-10 h-fit justify-center items-center'>
+		<View className='flex flex-col bg-base-100 mx-4 rounded-lg py-4 h-fit justify-center items-center'>
 			{/* SVG with progress circles */}
 			<View className='flex flex-row gap-10'>
 				<View className='flex flex-col items-center justify-center'>

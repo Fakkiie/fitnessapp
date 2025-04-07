@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { FontAwesome } from "@expo/vector-icons";
-import { Text, View } from "react-native";
-import { Circle, Svg } from "react-native-svg";
+import { FontAwesome } from '@expo/vector-icons';
+import { Text, View } from 'react-native';
+import { Circle, Svg } from 'react-native-svg';
 
-import { useMacros } from "./MacrosContext";
+import { useMacros } from './MacrosContext';
 
 export default function Nutrition() {
 	// Get global macros state
@@ -24,7 +24,7 @@ export default function Nutrition() {
 			{/* Box with a slightly different color */}
 			<View className='mx-10 flex h-fit flex-col items-center rounded-lg bg-base-100'>
 				<Text className='text-xl font-bold text-white'>Calories</Text>
-				<View className='mx-4 mb-4 flex flex-row items-center justify-between'>
+				<View className='mx-4 flex flex-row items-center justify-between'>
 					<View className='relative flex flex-col items-center justify-center'>
 						<Svg width='120' height='130' viewBox='0 0 120 130'>
 							{/* Background circle */}

@@ -11,7 +11,12 @@ import {
 } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 
-import { Meal, storage, addMeal } from '../../storage/storage';
+import {
+	Meal,
+	storage,
+	addMeal,
+	addMealEatenToday,
+} from '../../storage/storage';
 import { useMacros } from '../../components/MacrosContext';
 
 import CollapsibleDropdown from '../CollapsableDropdown';
@@ -75,12 +80,14 @@ export default function AddMealModel({
 		carbs,
 		calories,
 		pastMeal,
+		name,
 	}: {
 		protein: string;
 		fat: string;
 		carbs: string;
 		calories: string;
 		pastMeal: boolean;
+		name?: string;
 	}) => {
 		const eatenProtein = parseFloat(protein) || 0;
 		const eatenFat = parseFloat(fat) || 0;
@@ -89,12 +96,12 @@ export default function AddMealModel({
 
 		addMacros(eatenProtein, eatenFat, eatenCarbs, caloriesEaten);
 		const meal = {
-			name: mealName,
+			name: pastMeal && name ? name : mealName,
 			protein: eatenProtein,
 			fat: eatenFat,
 			carbs: eatenCarbs,
 			calories: caloriesEaten,
-			date: new Date().toISOString(),
+			date: new Date(),
 		};
 
 		if (!pastMeal) {
@@ -102,6 +109,8 @@ export default function AddMealModel({
 			console.log('Stuff', ret);
 			setPastMeals(ret);
 		}
+
+		addMealEatenToday(meal);
 
 		setMealName('');
 		setProtein('');
@@ -189,6 +198,7 @@ export default function AddMealModel({
 														calories:
 															meal.calories.toString(),
 														pastMeal: true,
+														name: meal.name.toString(),
 													});
 												}}
 											>
@@ -196,7 +206,11 @@ export default function AddMealModel({
 													{meal.name}
 												</Text>
 												<Text className='text-neutral/50 text-xs font-semibold'>
-													{meal.date.split('T')[0]}
+													{
+														new Date(meal.date)
+															.toISOString()
+															.split('T')[0]
+													}
 												</Text>
 											</TouchableOpacity>
 										)

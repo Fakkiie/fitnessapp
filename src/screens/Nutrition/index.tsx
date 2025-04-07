@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View, SafeAreaView } from 'react-native';
 import React, { useState } from 'react';
 // import { SafeAreaView } from "react-native-safe-area-context";
-import tw from 'twrnc';
 import AddMealModel from 'src/components/nutrition/AddMealModel';
 
 import Nutrition from '../../components/Nutrition';
 import Macro from '../../components/Macro';
-import { clearMeals } from 'src/storage/storage';
+import TodaysMealList from 'src/components/nutrition/TodaysMealList';
+import { clearMeals, resetMacros } from 'src/storage/storage';
+import TablerPlus from 'src/components/svg/TablerPlus';
 
 const getCurrentDate = () => {
 	const today = new Date();
@@ -24,37 +25,45 @@ export default function NutritionMainScreen() {
 	const [modalVisible, setModalVisible] = useState(false);
 
 	return (
-		<View className='flex h-full flex-col bg-base-100 px-4 py-10'>
-			<Text className='z-10 mx-8 mt-16 h-fit text-lg font-bold text-neutral'>
+		<SafeAreaView className='flex h-full flex-col bg-base-100'>
+			<Text className='z-10 mx-8 h-fit text-lg font-bold text-neutral'>
 				{getCurrentDate()}
 			</Text>
-			<ScrollView
-				contentContainerStyle={tw`flex flex-col gap-10 my-10`}
-				showsVerticalScrollIndicator={false}
-			>
+
+			<View className='h-[1px] bg-neutral/20 w-[90%] my-4 mx-auto' />
+			<View className='flex flex-col items-center'>
 				<Nutrition />
-
 				<Macro />
-			</ScrollView>
+			</View>
 
-			{/* fab */}
-			<TouchableOpacity
-				className='w-[90%] mx-auto h-20 bg-primary rounded-full justify-center items-center shadow-lg'
-				onPress={() => setModalVisible(true)}
-			>
-				<Text style={tw`text-white text-[20px] font-bold`}>
-					+ Add Meal
-				</Text>
-			</TouchableOpacity>
-			<TouchableOpacity className='' onPress={() => clearMeals()}>
-				<Text className='text-center text-primary text-sm font-semibold'>
-					Wipe Meals
-				</Text>
-			</TouchableOpacity>
+			<View className='relative'>
+				<View className='h-[1px] bg-neutral/20 w-[90%] my-4 mx-auto' />
+				<TodaysMealList modalVisible={modalVisible} />
+
+				{/* fab */}
+				<TouchableOpacity
+					className='mx-auto h-12 w-12 bg-primary rounded-full justify-center items-center shadow-lg absolute bottom-6 right-6'
+					onPress={() => setModalVisible(true)}
+				>
+					<TablerPlus color='white' />
+				</TouchableOpacity>
+			</View>
+			<View className='flex flex-row justify-between items-center mx-12 mb-4'>
+				<TouchableOpacity className='' onPress={() => clearMeals()}>
+					<Text className='text-center text-primary text-sm font-semibold'>
+						Wipe Meals
+					</Text>
+				</TouchableOpacity>
+				<TouchableOpacity className='' onPress={() => resetMacros()}>
+					<Text className='text-center text-primary text-sm font-semibold'>
+						Reset Macros
+					</Text>
+				</TouchableOpacity>
+			</View>
 			<AddMealModel
 				modalVisible={modalVisible}
 				setModalVisible={setModalVisible}
 			/>
-		</View>
+		</SafeAreaView>
 	);
 }
