@@ -19,6 +19,8 @@ import {
 } from '../../storage/storage';
 import { useMacros } from '../../components/MacrosContext';
 
+import uuid from 'react-native-uuid';
+
 import CollapsibleDropdown from '../CollapsableDropdown';
 import TablerNoMeat from '../svg/TablerNoMeat';
 import TablerSearch from '../svg/TablerSearch';
@@ -96,6 +98,7 @@ export default function AddMealModel({
 
 		addMacros(eatenProtein, eatenFat, eatenCarbs, caloriesEaten);
 		const meal = {
+			id: uuid.v4(),
 			name: pastMeal && name ? name : mealName,
 			protein: eatenProtein,
 			fat: eatenFat,

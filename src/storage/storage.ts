@@ -52,7 +52,20 @@ export const saveMacros = (macros: Macros) => {
 		date: currMacros.date, // Store only the date part
 	};
 
-	console.log('New Macros', newMacros);
+	storage.set('macros', JSON.stringify(newMacros));
+};
+
+export const decreaseMacros = (macros: Macros) => {
+	const currMacros = loadMacros();
+
+	const newMacros: Macros = {
+		calories: currMacros.calories - macros.calories,
+		protein: currMacros.protein - macros.protein,
+		fat: currMacros.fat - macros.fat,
+		carbs: currMacros.carbs - macros.carbs,
+		date: currMacros.date, // Store only the date part
+	};
+
 	storage.set('macros', JSON.stringify(newMacros));
 };
 
@@ -114,6 +127,17 @@ export const removeMeal = (mealId: string) => {
 	saveMeals(updatedMeals);
 };
 
+export const removeMealEatenToday = (mealId?: string) => {
+	if (!mealId) {
+		console.error('Meal ID is required to remove a meal.');
+		return;
+	}
+	const mealsEaten = getMealsEatenToday();
+	const updatedMealsEaten = mealsEaten.filter((meal) => meal.id !== mealId);
+	storage.set('mealsEatenToday', JSON.stringify(updatedMealsEaten));
+	return updatedMealsEaten;
+};
+
 export const resetMacros = () => {
 	const macros = loadMacros();
 	const resetMacros: Macros = {
@@ -128,4 +152,8 @@ export const resetMacros = () => {
 
 export const clearMeals = () => {
 	storage.delete('meals');
+};
+
+export const clearMealsEatenToday = () => {
+	storage.delete('mealsEatenToday');
 };

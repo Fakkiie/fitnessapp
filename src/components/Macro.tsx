@@ -46,7 +46,7 @@ export default function Macro() {
 								cx='50%'
 								cy='50%'
 								r='32.5'
-								stroke='#A5DD9B'
+								stroke='#3BACB6'
 								strokeWidth='8'
 								fill='none'
 								strokeDasharray={`${calculateDashArray(totalProtein, goalProteins)} ${2 * Math.PI * 32.5 - calculateDashArray(totalProtein, goalProteins)}`}
@@ -82,7 +82,7 @@ export default function Macro() {
 								cx='50%'
 								cy='50%'
 								r='32.5'
-								stroke='#A5DD9B'
+								stroke='#82DBD8'
 								strokeWidth='8'
 								fill='none'
 								strokeDasharray={`${calculateDashArray(totalCarbs, goalCarbs)} ${2 * Math.PI * 32.5 - calculateDashArray(totalCarbs, goalCarbs)}`}
@@ -116,7 +116,7 @@ export default function Macro() {
 								cx='50%'
 								cy='50%'
 								r='32.5'
-								stroke='#A5DD9B'
+								stroke='#B3E8E5'
 								strokeWidth='8'
 								fill='none'
 								strokeDasharray={`${calculateDashArray(totalFat, goalFats)} ${2 * Math.PI * 32.5 - calculateDashArray(totalFat, goalFats)}`}

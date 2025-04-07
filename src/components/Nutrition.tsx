@@ -4,6 +4,9 @@ import { Text, View } from 'react-native';
 import { Circle, Svg } from 'react-native-svg';
 
 import { useMacros } from './MacrosContext';
+import TablerFlag from './svg/TablerFlag';
+import TablerMeal from './svg/TablerMeal';
+import TablerHeart from './svg/TablerHeart';
 
 export default function Nutrition() {
 	// Get global macros state
@@ -41,7 +44,7 @@ export default function Nutrition() {
 								cx='50%'
 								cy='50%'
 								r='50'
-								stroke='#14FFEC'
+								stroke='#2F8F9D'
 								strokeWidth='11'
 								fill='none'
 								strokeDashoffset={78}
@@ -63,36 +66,21 @@ export default function Nutrition() {
 					{/* Calories Information */}
 					<View className='mt-5 items-start justify-center px-5'>
 						<View className='mb-3 flex flex-row items-center gap-2'>
-							<FontAwesome
-								name='flag'
-								size={20}
-								color='#0D7377'
-								className='mr-2'
-							/>
+							<TablerFlag color='#328E6E' />
 							<Text className='text-lg font-bold text-white'>
 								Goal: {goalCalories}
 							</Text>
 						</View>
 
 						<View className='mb-3 flex flex-row items-center gap-2'>
-							<FontAwesome
-								name='cutlery'
-								size={20}
-								color='#0D7377'
-								className='mr-2'
-							/>
+							<TablerMeal color='#67AE6E' />
 							<Text className='text-lg font-bold text-white'>
 								Eaten: {caloriesEaten}
 							</Text>
 						</View>
 
 						<View className='mb-3 flex flex-row items-center gap-2'>
-							<FontAwesome
-								name='heart'
-								size={20}
-								color='#0D7377'
-								className='mr-2'
-							/>
+							<TablerHeart color='#90C67C' />
 							<Text className='text-lg font-bold text-white'>
 								Exercise: {caloriesBurned}
 							</Text>

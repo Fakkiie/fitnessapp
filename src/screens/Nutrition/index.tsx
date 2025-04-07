@@ -7,7 +7,11 @@ import AddMealModel from 'src/components/nutrition/AddMealModel';
 import Nutrition from '../../components/Nutrition';
 import Macro from '../../components/Macro';
 import TodaysMealList from 'src/components/nutrition/TodaysMealList';
-import { clearMeals, resetMacros } from 'src/storage/storage';
+import {
+	clearMeals,
+	clearMealsEatenToday,
+	resetMacros,
+} from 'src/storage/storage';
 import TablerPlus from 'src/components/svg/TablerPlus';
 
 const getCurrentDate = () => {
@@ -52,6 +56,14 @@ export default function NutritionMainScreen() {
 				<TouchableOpacity className='' onPress={() => clearMeals()}>
 					<Text className='text-center text-primary text-sm font-semibold'>
 						Wipe Meals
+					</Text>
+				</TouchableOpacity>
+				<TouchableOpacity
+					className=''
+					onPress={() => clearMealsEatenToday()}
+				>
+					<Text className='text-center text-primary text-sm font-semibold'>
+						Wipe Meals Eaten
 					</Text>
 				</TouchableOpacity>
 				<TouchableOpacity className='' onPress={() => resetMacros()}>

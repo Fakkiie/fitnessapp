@@ -1,5 +1,10 @@
 import React, { createContext, useContext, useState } from 'react';
-import { loadMacros, Macros, saveMacros } from 'src/storage/storage';
+import {
+	loadMacros,
+	Macros,
+	saveMacros,
+	decreaseMacros,
+} from 'src/storage/storage';
 
 interface MacrosContextType {
 	totalProtein: number;
@@ -7,6 +12,12 @@ interface MacrosContextType {
 	totalCarbs: number;
 	totalCalories: number;
 	addMacros: (
+		protein: number,
+		fat: number,
+		carbs: number,
+		calories: number
+	) => void;
+	removeMacros: (
 		protein: number,
 		fat: number,
 		carbs: number,
@@ -55,6 +66,25 @@ export const MacrosProvider: React.FC<MacrosProviderProps> = ({ children }) => {
 		saveMacros(macros);
 	};
 
+	const removeMacros = (
+		protein: number,
+		fat: number,
+		carbs: number,
+		calories: number
+	) => {
+		setTotalProtein((prev) => prev - protein);
+		setTotalFat((prev) => prev - fat);
+		setTotalCarbs((prev) => prev - carbs);
+		setTotalCalories((prev) => prev - calories);
+		const macros: Macros = {
+			protein: protein,
+			fat: fat,
+			carbs: carbs,
+			calories: calories,
+		};
+		decreaseMacros(macros);
+	};
+
 	const value = React.useMemo(
 		() => ({
 			totalProtein,
@@ -62,6 +92,7 @@ export const MacrosProvider: React.FC<MacrosProviderProps> = ({ children }) => {
 			totalCarbs,
 			totalCalories,
 			addMacros,
+			removeMacros,
 		}),
 		[totalProtein, totalFat, totalCarbs, totalCalories]
 	);
