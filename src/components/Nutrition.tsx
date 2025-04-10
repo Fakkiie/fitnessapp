@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { FontAwesome } from '@expo/vector-icons';
 import { Text, View } from 'react-native';
-import { Circle, Svg } from 'react-native-svg';
+import { Circle, Defs, LinearGradient, Svg, Stop } from 'react-native-svg';
 
 import { useMacros } from './MacrosContext';
 import TablerFlag from './svg/TablerFlag';
@@ -31,6 +30,19 @@ export default function Nutrition() {
 					<View className='relative flex flex-col items-center justify-center'>
 						<Svg width='120' height='130' viewBox='0 0 120 130'>
 							{/* Background circle */}
+							<Defs>
+								<LinearGradient
+									id='grad'
+									x1='50%'
+									y1='20%'
+									x2='100%'
+									y2='100%'
+								>
+									{/* #2F8F9D */}
+									<Stop offset='0' stopColor='#2F8F9D' />
+									<Stop offset='1' stopColor='#14FFEC' />
+								</LinearGradient>
+							</Defs>
 							<Circle
 								cx='50%'
 								cy='50%'
@@ -44,7 +56,8 @@ export default function Nutrition() {
 								cx='50%'
 								cy='50%'
 								r='50'
-								stroke='#2F8F9D'
+								// stroke='#2F8F9D'
+								stroke='url(#grad)'
 								strokeWidth='11'
 								fill='none'
 								strokeDashoffset={78}

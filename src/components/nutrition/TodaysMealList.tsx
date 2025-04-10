@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import {
 	Meal,
@@ -19,13 +19,13 @@ import { useMacros } from '../MacrosContext';
 
 export default function TodaysMealList({
 	modalVisible,
+	handleDeleteSliding,
 }: {
 	modalVisible: boolean;
+	handleDeleteSliding: (isSliding: boolean) => void;
 }) {
 	const [meals, setMeals] = useState<Meal[]>(getMealsEatenToday());
-
 	const reanimatedRef = useRef<SwipeableMethods>(null);
-
 	const { removeMacros } = useMacros();
 
 	useEffect(() => {
@@ -39,10 +39,6 @@ export default function TodaysMealList({
 	useEffect(() => {
 		setMeals(getMealsEatenToday());
 	}, [modalVisible]);
-
-	useEffect(() => {
-		console.log('MEals', meals);
-	}, [meals]);
 
 	function RightAction(drag: SharedValue<number>, meal: Meal) {
 		const styleAnimation = useAnimatedStyle(() => {
@@ -67,6 +63,7 @@ export default function TodaysMealList({
 								);
 							}
 							drag.value = 0;
+							handleDeleteSliding(false);
 						}}
 					>
 						<TablerDelete color='white' />
@@ -101,12 +98,30 @@ export default function TodaysMealList({
 								enableTrackpadTwoFingerGesture
 								overshootLeft={false}
 								leftThreshold={0}
-								rightThreshold={80}
+								rightThreshold={50}
 								renderRightActions={(
 									_: SharedValue<number>,
 									drag: SharedValue<number>
 								) => {
 									return RightAction(drag, meal);
+								}}
+								onSwipeableClose={() => {
+									handleDeleteSliding(false);
+								}}
+								onSwipeableOpenStartDrag={() => {
+									handleDeleteSliding(true);
+								}}
+								onSwipeableOpen={() => {
+									handleDeleteSliding(true);
+								}}
+								onSwipeableWillOpen={() => {
+									handleDeleteSliding(true);
+								}}
+								onSwipeableCloseStartDrag={() => {
+									handleDeleteSliding(false);
+								}}
+								onSwipeableWillClose={() => {
+									handleDeleteSliding(false);
 								}}
 							>
 								<View

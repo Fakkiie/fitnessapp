@@ -13,6 +13,12 @@ import {
 	resetMacros,
 } from 'src/storage/storage';
 import TablerPlus from 'src/components/svg/TablerPlus';
+import Animated, {
+	interpolate,
+	useAnimatedStyle,
+	useSharedValue,
+	withTiming,
+} from 'react-native-reanimated';
 
 const getCurrentDate = () => {
 	const today = new Date();
@@ -27,6 +33,23 @@ const getCurrentDate = () => {
 
 export default function NutritionMainScreen() {
 	const [modalVisible, setModalVisible] = useState(false);
+	const isSlidingRef = React.useRef(false);
+	const [isSlidingState, setIsSlidingState] = useState(false);
+
+	const progress = useSharedValue(1);
+
+	function handleDeleteSliding(isSliding: boolean) {
+		isSlidingRef.current = isSliding;
+		setIsSlidingState(isSliding);
+		const next = isSlidingRef.current ? 0 : 1;
+		progress.value = withTiming(next, { duration: 300 });
+	}
+
+	const animatedStyle = useAnimatedStyle(() => {
+		return {
+			opacity: interpolate(progress.value, [0, 1], [0, 1]),
+		};
+	});
 
 	return (
 		<SafeAreaView className='flex h-full flex-col bg-base-100'>
@@ -42,15 +65,30 @@ export default function NutritionMainScreen() {
 
 			<View className='relative'>
 				<View className='h-[1px] bg-neutral/20 w-[90%] my-4 mx-auto' />
-				<TodaysMealList modalVisible={modalVisible} />
+				<TodaysMealList
+					modalVisible={modalVisible}
+					handleDeleteSliding={handleDeleteSliding}
+				/>
 
 				{/* fab */}
-				<TouchableOpacity
-					className='mx-auto h-12 w-12 bg-primary rounded-full justify-center items-center shadow-lg absolute bottom-6 right-6'
-					onPress={() => setModalVisible(true)}
+				<Animated.View
+					style={[animatedStyle]}
+					pointerEvents={isSlidingState ? 'none' : 'auto'}
 				>
-					<TablerPlus color='white' />
-				</TouchableOpacity>
+					<TouchableOpacity
+						className={`mx-auto h-12 w-12 bg-primary rounded-full justify-center items-center shadow-lg absolute bottom-6 right-6 ${
+							isSlidingRef.current
+								? 'pointer-events-none'
+								: 'pointer-events-auto'
+						}`}
+						onPress={() => {
+							if (isSlidingRef.current) return;
+							setModalVisible(true);
+						}}
+					>
+						<TablerPlus color='white' />
+					</TouchableOpacity>
+				</Animated.View>
 			</View>
 			<View className='flex flex-row justify-between items-center mx-12 mb-4'>
 				<TouchableOpacity className='' onPress={() => clearMeals()}>
