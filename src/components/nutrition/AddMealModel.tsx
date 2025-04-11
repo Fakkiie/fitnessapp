@@ -153,7 +153,10 @@ export default function AddMealModel({
 						</TouchableOpacity>
 					</View>
 					{/* Past Meals */}
-					<CollapsibleDropdown title='Past Meals' defaultExpanded={1}>
+					<CollapsibleDropdown
+						title='Past Meals'
+						defaultExpanded={pastMeals.length ? 1 : 0}
+					>
 						<KeyboardAvoidingView>
 							{/* Past Meal Search */}
 							<View className='flex flex-row items-center justify-between gap-2'>
@@ -235,6 +238,7 @@ export default function AddMealModel({
 						<CollapsibleDropdown
 							title='Make Custom Meal'
 							maxHeight={180}
+							defaultExpanded={pastMeals.length ? 0 : 1}
 						>
 							<KeyboardAvoidingView
 								className='flex flex-col'
