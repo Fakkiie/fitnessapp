@@ -1183,7 +1183,7 @@
     "level": "beginner",
     "mechanic": "isolation",
     "equipment": "body only",
-    "primaryMuscles": ["abdominals"],
+    "primaryMuscles": ["obliques"],
     "secondaryMuscles": [],
     "category": "strength",
     "id": "Oblique_Crunches"

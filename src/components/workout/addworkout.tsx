@@ -23,11 +23,11 @@ const MUSCLE_GROUPS = [
   'traps',
   'calves',
   'abductors',
+  'adductors',
   'middle back',
+  'lower back',
   'glutes',
   'hamstrings',
-  'lower back',
-  'adductors',
   `quadriceps`,
   'forearms',
   'neck', // rename sternocalvical to neck
