@@ -2,7 +2,7 @@ import * as React from 'react';
 import Svg, { Path } from 'react-native-svg';
 import { SvgProps } from 'src/interfaces';
 
-function TablerFlag(props: SvgProps) {
+function TablerFlag(props?: SvgProps) {
 	return (
 		<Svg width={28} height={28} viewBox='0 0 24 24' {...props}>
 			<Path
