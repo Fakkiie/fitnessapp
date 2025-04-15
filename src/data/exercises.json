@@ -1267,7 +1267,7 @@
   },
   {
     "name": "Push-Up Wide",
-    "force": null,
+    "force": "push",
     "level": "beginner",
     "mechanic": "compound",
     "equipment": "body only",
@@ -1543,7 +1543,7 @@
   },
   {
     "name": "Smith Machine Decline Press",
-    "force": null,
+    "force": "push",
     "level": "beginner",
     "mechanic": "compound",
     "equipment": "machine",
@@ -1964,7 +1964,6 @@
     "category": "strength",
     "id": "V-Bar_Pulldown"
   },
-
   {
     "name": "Weighted Pull Ups",
     "force": "pull",

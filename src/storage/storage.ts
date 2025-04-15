@@ -23,8 +23,28 @@ export type Macros = {
 
 export type WorkoutGroup = {
 	name: string;
-	exercises: string[];
+	exercises: Exercise[];
 	id?: string;
+};
+
+export type Workout = {
+	name: string;
+	exercises: Exercise[];
+	date: Date;
+	timeSpent: number;
+	id?: string;
+};
+
+export type Exercise = {
+	name: string;
+	force: string | null;
+	level: string;
+	mechanic: string;
+	equipment: string;
+	primaryMuscles: string[];
+	secondaryMuscles: string[];
+	category: string;
+	id: string;
 };
 
 export const saveMeals = (meals: Meal[]) => {
@@ -169,6 +189,10 @@ export const getWorkoutGroups = (): WorkoutGroup[] => {
 	return raw ? JSON.parse(raw) : [];
 };
 
+export const clearWorkoutGroups = () => {
+	storage.delete('workoutGroups');
+};
+
 export const saveWorkoutGroups = (groups: WorkoutGroup[]) => {
 	storage.set('workoutGroups', JSON.stringify(groups));
 };
@@ -178,6 +202,23 @@ export const addWorkoutGroup = (group: WorkoutGroup) => {
 	if (!group.id) group.id = uuid.v4();
 	const updated = [...current, group];
 	saveWorkoutGroups(updated);
+};
+
+export const logWorkout = (workout: Workout) => {
+	if (!workout.id) workout.id = uuid.v4();
+	const current = getLoggedWorkouts();
+	const updated = [...current, workout];
+	const loggedWorkouts: Workout[] = updated;
+	storage.set('loggedWorkouts', JSON.stringify(loggedWorkouts));
+};
+
+export const getLoggedWorkouts = (): Workout[] => {
+	const raw = storage.getString('loggedWorkouts');
+	return raw ? JSON.parse(raw) : [];
+};
+
+export const clearLoggedWorkouts = () => {
+	storage.delete('loggedWorkouts');
 };
 
 export const clearMealsEatenToday = () => {
