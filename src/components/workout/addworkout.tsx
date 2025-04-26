@@ -9,13 +9,22 @@ import {
 	View,
 	Modal,
 } from 'react-native';
-import Svg, { Path } from 'react-native-svg';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import SvgComponent from 'src/components/svg/BackButton';
+
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+type RootStackParamList = {
+	CurrentWorkout: undefined;
+};
 
 import exercises_json from '../../data/exercises.json';
 
-import { Exercise, getWorkoutGroups, WorkoutGroup } from 'src/storage/storage';
+import {
+	Exercise,
+	getWorkoutGroups,
+	startWorkout,
+	Workout,
+	WorkoutGroup,
+} from 'src/storage/storage';
 import CollapsibleDropdown from '../CollapsableDropdown';
 import TablerClose from '../svg/TablerClose';
 
@@ -43,7 +52,8 @@ const MUSCLE_GROUPS = [
 export function AddWorkout() {
 	const exercises: Exercise[] = exercises_json;
 
-	const navigation = useNavigation();
+	const navigation =
+		useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 	const [searchQuery, setSearchQuery] = useState('');
 	const [expandedGroup, setExpandedGroup] = useState<string | null>(null);
 	const [selectedExercises, setSelectedExercises] = useState<Exercise[]>([]);
@@ -84,6 +94,26 @@ export function AddWorkout() {
 				return [...prev, exercise];
 			}
 		});
+	};
+
+	const handleStartWorkout = (group?: WorkoutGroup) => {
+		if (group) {
+			const newWorkout: Workout = {
+				...group,
+				date: new Date(),
+				timeSpent: 0,
+			};
+			startWorkout(newWorkout);
+		} else {
+			const newWorkout: Workout = {
+				name: workoutName,
+				exercises: selectedExercises,
+				date: new Date(),
+				timeSpent: 0,
+			};
+			startWorkout(newWorkout);
+		}
+		navigation.navigate('CurrentWorkout');
 	};
 
 	const renderExerciseItem = ({ item }: { item: Exercise }) => {
@@ -128,7 +158,7 @@ export function AddWorkout() {
 						Log Workout
 					</Text>
 					<TouchableOpacity onPress={() => navigation.goBack()}>
-						<SvgComponent />
+						<TablerClose color='white' width={30} height={30} />
 					</TouchableOpacity>
 				</View>
 
@@ -201,7 +231,7 @@ export function AddWorkout() {
 					<TouchableOpacity
 						className={`rounded p-2 mt-4 mb-12 bg-primary ${selectedExercises.length === 0 ? 'opacity-50' : ' opacity-100'}`}
 						disabled={selectedExercises.length === 0}
-						onPress={() => setModalVisible(true)}
+						onPress={() => handleStartWorkout()}
 					>
 						<Text className='text-neutral w-full text-center text-lg font-semibold'>
 							Start Workout
@@ -262,62 +292,6 @@ export function AddWorkout() {
 					</View>
 				</View>
 			</ScrollView>
-
-			{/* Start New Workout Modal */}
-			{/* <Modal
-				animationType='fade'
-				transparent={true}
-				visible={modalVisible}
-				onRequestClose={() => {
-					setModalVisible(!modalVisible);
-				}}
-			>
-				<View className='flex-1 justify-center items-center bg-black/50'>
-					<View className='w-11/12 h-fit bg-base-100 rounded-lg p-4 shadow-lg relative'>
-						<View className='flex flex-row justify-between items-center'>
-							<Text className='text-white font-semibold text-lg'>
-								Start Workout
-							</Text>
-							<TouchableOpacity
-								className='relative h-fit w-fit rounded-lg'
-								onPress={() => setModalVisible(!modalVisible)}
-							>
-								<TablerClose color='white' />
-							</TouchableOpacity>
-						</View>
-						<View className='h-[1px] w-full bg-base-200 my-2' />
-						<View>
-							<TextInput
-								className='rounded-lg py-2 text-white px-3 w-full bg-base-200 mb-2'
-								placeholder='│ Name your workout'
-								placeholderTextColor='#999'
-								value={workoutName}
-								onChangeText={setWorkoutName}
-							/>
-						</View>
-						<ScrollView className='max-h-96 rounded bg-base-200 border-base-200 border p-2'>
-							{selectedExercises.map((exercise, index) => (
-								<View key={exercise.id} className='rounded'>
-									{index !== 0 && (
-										<View className='h-[1px] w-full bg-base-100 my-2' />
-									)}
-									<Text className='text font-semibold text-white pb-1'>
-										{exercise.name}
-									</Text>
-									<Text className='text-xs capitalize text-white'>
-										{exercise.equipment}
-									</Text>
-								</View>
-							))}
-						</ScrollView>
-						<TouchableOpacity className='mt-4 rounded p-2 bg-primary'>
-							<Text className='w-full text-neutral text-lg font-semibold text-center'>
-								Start Workout
-							</Text>
-						</TouchableOpacity>
-					</View>
-				</View>
-			</Modal> */}
 		</SafeAreaView>
 	);
 }

@@ -10,7 +10,7 @@ import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { getWorkoutGroups, WorkoutGroup } from 'src/storage/storage';
 
-import SvgComponent from '../svg/BackButton';
+import TablerClose from '../svg/TablerClose';
 
 export default function ViewGrouped() {
 	const [groups, setGroups] = useState<WorkoutGroup[]>([]);
@@ -40,8 +40,11 @@ export default function ViewGrouped() {
 					<Text className='flex-1 text-center text-2xl font-bold text-white'>
 						Grouped Workouts
 					</Text>
-					<TouchableOpacity onPress={() => navigation.goBack()}>
-						<SvgComponent />
+					<TouchableOpacity
+						onPress={() => navigation.goBack()}
+						className='absolute right-0'
+					>
+						<TablerClose color='white' width={30} height={30} />
 					</TouchableOpacity>
 				</View>
 

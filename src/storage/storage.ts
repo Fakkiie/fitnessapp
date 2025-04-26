@@ -28,12 +28,32 @@ export type WorkoutGroup = {
 };
 
 export type Workout = {
-	name: string;
+	name?: string;
 	exercises: Exercise[];
 	date: Date;
 	timeSpent: number;
 	id?: string;
 };
+
+export type CurrentWorkout = {
+	name?: string;
+	exercises: WorkoutExercise[];
+	date: Date;
+	timeSpent?: number;
+	id?: string;
+};
+
+export type Set = {
+	reps: number;
+	weight: number;
+};
+
+export interface WorkoutExercise extends Exercise {
+	workoutExerciseId: string;
+	sets: Set[];
+	bilateral: boolean;
+	note?: string;
+}
 
 export type Exercise = {
 	name: string;
@@ -204,15 +224,15 @@ export const addWorkoutGroup = (group: WorkoutGroup) => {
 	saveWorkoutGroups(updated);
 };
 
-export const logWorkout = (workout: Workout) => {
+export const logWorkout = (workout: CurrentWorkout) => {
 	if (!workout.id) workout.id = uuid.v4();
 	const current = getLoggedWorkouts();
 	const updated = [...current, workout];
-	const loggedWorkouts: Workout[] = updated;
+	const loggedWorkouts: CurrentWorkout[] = updated;
 	storage.set('loggedWorkouts', JSON.stringify(loggedWorkouts));
 };
 
-export const getLoggedWorkouts = (): Workout[] => {
+export const getLoggedWorkouts = (): CurrentWorkout[] => {
 	const raw = storage.getString('loggedWorkouts');
 	return raw ? JSON.parse(raw) : [];
 };
@@ -223,4 +243,89 @@ export const clearLoggedWorkouts = () => {
 
 export const clearMealsEatenToday = () => {
 	storage.delete('mealsEatenToday');
+};
+
+export const getCurrentWorkout = () => {
+	const raw = storage.getString('currentWorkout');
+	return raw ? JSON.parse(raw) : null;
+};
+
+export const startWorkout = (workout: Workout) => {
+	if (!workout.id) workout.id = uuid.v4();
+
+	for (const exercise of workout.exercises) {
+		const updatedExercise: WorkoutExercise = {
+			...exercise,
+			workoutExerciseId: uuid.v4(),
+			sets: [{ reps: 0, weight: 0 }],
+			bilateral: true,
+			note: '',
+		};
+		workout.exercises[workout.exercises.indexOf(exercise)] =
+			updatedExercise;
+	}
+	storage.set('currentWorkout', JSON.stringify(workout));
+	console.log(workout);
+};
+
+export const finishWorkout = () => {
+	const raw = storage.getString('currentWorkout');
+	if (!raw) return;
+	const workout: CurrentWorkout = JSON.parse(raw);
+	workout.timeSpent = Date.now() - workout.date.getTime();
+	logWorkout(workout);
+	storage.delete('currentWorkout');
+};
+
+export const cancelCurrentWorkout = () => {
+	storage.delete('currentWorkout');
+};
+
+export const addSetByWorkoutExerciseId = (workoutExerciseId: string) => {
+	const raw = storage.getString('currentWorkout');
+	if (!raw) return;
+	const workout: CurrentWorkout = JSON.parse(raw);
+
+	const exerciseIndex = workout.exercises.findIndex(
+		(exercise) => exercise.workoutExerciseId === workoutExerciseId
+	);
+	if (exerciseIndex >= 0 && workout.exercises[exerciseIndex]) {
+		workout.exercises[exerciseIndex].sets.push({ reps: 0, weight: 0 });
+		storage.set('currentWorkout', JSON.stringify(workout));
+		console.log(workout.exercises[exerciseIndex].sets);
+	}
+};
+
+export const removeSetByWorkoutExerciseId = (
+	workoutExerciseId: string,
+	setIndex: number
+) => {
+	const raw = storage.getString('currentWorkout');
+	if (!raw) return;
+	const workout: CurrentWorkout = JSON.parse(raw);
+	const exerciseIndex = workout.exercises.findIndex(
+		(exercise) => exercise.workoutExerciseId === workoutExerciseId
+	);
+	if (exerciseIndex >= 0 && workout.exercises[exerciseIndex]) {
+		workout.exercises[exerciseIndex].sets.splice(setIndex, 1);
+		storage.set('currentWorkout', JSON.stringify(workout));
+	}
+};
+
+export const updateSetByWorkoutExerciseId = (
+	workoutExerciseId: string,
+	setIndex: number,
+	set: Set
+) => {
+	const raw = storage.getString('currentWorkout');
+	if (!raw) return;
+	const workout: CurrentWorkout = JSON.parse(raw);
+
+	const exerciseIndex = workout.exercises.findIndex(
+		(exercise) => exercise.workoutExerciseId === workoutExerciseId
+	);
+	if (exerciseIndex >= 0 && workout.exercises[exerciseIndex]) {
+		workout.exercises[exerciseIndex].sets[setIndex] = set;
+		storage.set('currentWorkout', JSON.stringify(workout));
+	}
 };

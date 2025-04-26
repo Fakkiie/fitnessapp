@@ -1,10 +1,11 @@
-import { Text, View } from 'react-native';
+import { Text, Touchable, View, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MuscleAnatomyFemaleBack from 'src/components/svg/MuscleAnatomyFemaleBack';
 import MuscleAnatomyFemaleFront from 'src/components/svg/MuscleAnatomyFemaleFront';
 import MuscleAnatomyFront from 'src/components/svg/MuscleAnatomyFront';
-
 import MuscleAnatomyBack from '../../components/svg/MuscleAnatomyBack';
+
+import { cancelCurrentWorkout } from 'src/storage/storage';
 
 export function Home() {
 	return (
@@ -22,6 +23,10 @@ export function Home() {
 					<MuscleAnatomyFemaleBack />
 				</View>
 			</View>
+
+			<TouchableOpacity onPress={cancelCurrentWorkout}>
+				<Text>Cancel Current Workout</Text>
+			</TouchableOpacity>
 		</SafeAreaView>
 	);
 }

@@ -2,6 +2,8 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { clearWorkoutGroups } from 'src/storage/storage';
 
+import React, { useEffect } from 'react';
+
 export function Log({ navigation }: { navigation: any }) {
 	return (
 		<SafeAreaView className='mt-auto flex h-full flex-col items-center justify-end bg-base-100'>

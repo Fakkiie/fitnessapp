@@ -1,9 +1,9 @@
-import { Stack } from "expo-router";
-import { NativeWindStyleSheet } from "nativewind";
-import { PaperProvider } from "react-native-paper";
+import { Stack } from 'expo-router';
+import { NativeWindStyleSheet } from 'nativewind';
+import { PaperProvider } from 'react-native-paper';
 
 NativeWindStyleSheet.setOutput({
-	default: "native",
+	default: 'native',
 });
 
 export default function Layout() {

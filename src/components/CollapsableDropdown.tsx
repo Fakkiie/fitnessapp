@@ -1,4 +1,4 @@
-import React, { useState, ReactNode, useEffect } from 'react';
+import React, { useState, ReactNode } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Animated, {
 	useSharedValue,
@@ -44,10 +44,6 @@ export default function CollapsibleDropdown({
 	const [contentHeight, setContentHeight] = useState<number>(0);
 	const [measured, setMeasured] = useState(false);
 
-	useEffect(() => {
-		console.log(contentHeight);
-	}, [contentHeight]);
-
 	const progress = useSharedValue<number>(defaultExpanded);
 
 	const toggleDropdown = () => {
@@ -89,12 +85,14 @@ export default function CollapsibleDropdown({
 			)}
 			<TouchableOpacity
 				onPress={
-					onPress
-						? onPress
-						: holdDownToOpen
-							? expanded
-								? toggleDropdown
+					holdDownToOpen
+						? expanded
+							? toggleDropdown
+							: onPress
+								? onPress
 								: undefined
+						: onPress
+							? onPress
 							: toggleDropdown
 				}
 				onLongPress={
