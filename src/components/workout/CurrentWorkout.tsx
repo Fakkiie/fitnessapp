@@ -23,8 +23,17 @@ import TablerDelete from '../svg/TablerDelete';
 import TablerMinus from '../svg/TablerMinus';
 import TablerAdd from '../svg/TablerAdd';
 
+import { useNavigation } from '@react-navigation/native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+type RootStackParamList = {
+	AddWorkout: undefined;
+	Home: undefined;
+};
+
 export default function CurrentWorkout() {
 	const currentWorkout = useRef<CurrentWorkoutType>(getCurrentWorkout());
+	const navigation =
+		useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 	const [forceRender, setForceRender] = React.useState(false);
 	const [modalVisible, setModalVisible] = React.useState(false);
 	const [
@@ -66,7 +75,11 @@ export default function CurrentWorkout() {
 	return (
 		<SafeAreaView className='flex-1 bg-base-100'>
 			<View className='flex flex-row items-center justify-between px-4'>
-				<TouchableOpacity>
+				<TouchableOpacity
+					onPress={() => {
+						// navigation.;
+					}}
+				>
 					<TablerClose color='white' width={28} height={28} />
 				</TouchableOpacity>
 				<Text className='text-2xl font-bold text-white'>
@@ -186,7 +199,12 @@ export default function CurrentWorkout() {
 									</View>
 								)
 							)}
-							<TouchableOpacity className='w-[90%] mx-auto rounded-lg bg-primary p-2 flex flex-row items-center justify-center'>
+							<TouchableOpacity
+								onPress={() =>
+									navigation.navigate('AddWorkout')
+								}
+								className='w-[90%] mx-auto rounded-lg bg-primary p-2 flex flex-row items-center justify-center'
+							>
 								<Text className='text-white font-semibold text-lg'>
 									Add Exercise
 								</Text>

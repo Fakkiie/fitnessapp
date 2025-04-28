@@ -1,5 +1,5 @@
-import { useNavigation } from '@react-navigation/native';
-import React, { useState, useEffect } from 'react';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
 	FlatList,
 	ScrollView,
@@ -24,6 +24,8 @@ import {
 	startWorkout,
 	Workout,
 	WorkoutGroup,
+	CurrentWorkout as CurrentWorkoutType,
+	getCurrentWorkout,
 } from 'src/storage/storage';
 import CollapsibleDropdown from '../CollapsableDropdown';
 import TablerClose from '../svg/TablerClose';
@@ -60,9 +62,11 @@ export function AddWorkout() {
 	const [workoutName, setWorkoutName] = useState('');
 	const [workoutGroups, setWorkoutGroups] = useState<WorkoutGroup[]>([]);
 	const [modalVisible, setModalVisible] = useState(true);
-	const [selectedWorkout, setSelectedWorkout] = useState<WorkoutGroup | null>(
-		null
-	);
+	const [currentWorkout, setCurrentWorkout] =
+		useState<CurrentWorkoutType | null>(getCurrentWorkout() ?? null);
+	// const [selectedWorkout, setSelectedWorkout] = useState<WorkoutGroup | null>(
+	// 	null
+	// );
 
 	const handleGroupPress = (group: string) => {
 		setExpandedGroup((prev) => (prev === group ? null : group));
@@ -79,6 +83,24 @@ export function AddWorkout() {
 	useEffect(() => {
 		setWorkoutGroups(getWorkoutGroups());
 	}, []);
+
+	useFocusEffect(
+		useCallback(() => {
+			if (!currentWorkout) {
+				const currWorkout = getCurrentWorkout();
+				if (currWorkout) {
+					setCurrentWorkout(currWorkout);
+					currWorkout.exercises.forEach((exercise: Exercise) => {
+						toggleExercise(exercise.name);
+					});
+				}
+			} else {
+				currentWorkout.exercises.forEach((exercise: Exercise) => {
+					toggleExercise(exercise.name);
+				});
+			}
+		}, [])
+	);
 
 	const toggleExercise = (exerciseName: string) => {
 		setSelectedExercises((prev: Exercise[]) => {
@@ -163,9 +185,10 @@ export function AddWorkout() {
 				</View>
 
 				<CollapsibleDropdown
-					title='New Workout'
+					title={currentWorkout ? 'Add to Workout' : 'New Workout'}
 					maxHeight={500}
 					paddingBottom={10}
+					defaultExpanded={currentWorkout ? 1 : 0}
 				>
 					{/* Search */}
 					<TextInput
@@ -234,63 +257,73 @@ export function AddWorkout() {
 						onPress={() => handleStartWorkout()}
 					>
 						<Text className='text-neutral w-full text-center text-lg font-semibold'>
-							Start Workout
+							{getCurrentWorkout()
+								? 'Return to Workout'
+								: 'Start Workout'}
 						</Text>
 					</TouchableOpacity>
 				</CollapsibleDropdown>
-				<View className='mt-4 py-4'>
-					<Text className='text-lg text-white font-semibold mb-2'>
-						Grouped Workouts
-					</Text>
+				{!currentWorkout && (
+					<View className='mt-4 py-4'>
+						<Text className='text-lg text-white font-semibold mb-2'>
+							Grouped Workouts
+						</Text>
 
-					<View>
-						<ScrollView
-							showsVerticalScrollIndicator={false}
-							className='mb-12'
-						>
-							{workoutGroups.length === 0 ? (
-								<Text className='text-center text-white'>
-									No groups yet.
-								</Text>
-							) : (
-								workoutGroups.map((group) => (
-									<View className='mb-2' key={group.id}>
-										<CollapsibleDropdown
-											title={group.name}
-											paddingBottom={10}
-											holdDownToOpen={true}
-											showCarret={false}
-											onPress={() =>
-												handleGroupedWorkoutPress(group)
-											}
-										>
-											<View>
-												{group.exercises.map(
-													(exercise) => (
-														<View
-															key={exercise.id}
-															className='rounded'
-														>
-															<View className='h-[1px] w-full bg-base-200 my-2' />
-															<Text className='text font-semibold text-white pb-1'>
-																{exercise.name}
-															</Text>
-															<Text className='text-xs capitalize text-white'>
-																{
-																	exercise.equipment
-																}
-															</Text>
-														</View>
+						<View>
+							<ScrollView
+								showsVerticalScrollIndicator={false}
+								className='mb-12'
+							>
+								{workoutGroups.length === 0 ? (
+									<Text className='text-center text-white'>
+										No groups yet.
+									</Text>
+								) : (
+									workoutGroups.map((group) => (
+										<View className='mb-2' key={group.id}>
+											<CollapsibleDropdown
+												title={group.name}
+												paddingBottom={10}
+												holdDownToOpen={true}
+												showCarret={false}
+												onPress={() =>
+													handleGroupedWorkoutPress(
+														group
 													)
-												)}
-											</View>
-										</CollapsibleDropdown>
-									</View>
-								))
-							)}
-						</ScrollView>
+												}
+											>
+												<View>
+													{group.exercises.map(
+														(exercise) => (
+															<View
+																key={
+																	exercise.id
+																}
+																className='rounded'
+															>
+																<View className='h-[1px] w-full bg-base-200 my-2' />
+																<Text className='text font-semibold text-white pb-1'>
+																	{
+																		exercise.name
+																	}
+																</Text>
+																<Text className='text-xs capitalize text-white'>
+																	{
+																		exercise.equipment
+																	}
+																</Text>
+															</View>
+														)
+													)}
+												</View>
+											</CollapsibleDropdown>
+										</View>
+									))
+								)}
+							</ScrollView>
+						</View>
 					</View>
-				</View>
+				)}
 			</ScrollView>
 		</SafeAreaView>
 	);
